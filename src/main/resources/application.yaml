@@ -1,0 +1,46 @@
+server:
+  port: ${PORT:8086}
+
+spring:
+  application:
+    name: ms-andesstay-rabbit-admin
+
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USER:andesstay}
+    password: ${RABBITMQ_PASSWORD:andesstay_dev}
+    virtual-host: /
+    connection-timeout: 5s
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${AZURE_ISSUER_URI:https://login.microsoftonline.com/24b1cd18-d18e-4855-bcaf-51ac2db566d5/v2.0}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+andesstay:
+  rabbit-admin:
+    # Recursos del sistema que la API NO permite eliminar,
+    # porque los microservicios dejarían de funcionar.
+    protected-names:
+      - andesstay.commands
+      - andesstay.events
+      - andesstay.dlx
+      - notify.email.q
+      - notify.email.dlq
+      - catalog.housekeeping.q
+      - catalog.housekeeping.dlq
+      - report.voucher.q
+      - report.voucher.dlq
+      - audit.reservation.q
+      - audit.reservation.dlq
