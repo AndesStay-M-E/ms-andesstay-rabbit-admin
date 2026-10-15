@@ -65,6 +65,19 @@ Content-Type: application/json
 | RabbitMQ rechaza la operación (ej. cola existente con otros argumentos) | 409 |
 | RabbitMQ apagado | 503 |
 
+## Probar con Postman
+
+La carpeta `postman/` contiene la colección `AndesStay-RabbitAdmin.postman_collection.json` con 19 peticiones (30 verificaciones automáticas):
+
+- **A. Flujo correcto (en orden):** crear exchange, cola con DLQ y binding; consultar, vaciar y eliminar todo (201, 200, 204).
+- **B. Validaciones y errores:** nombres vacíos, inválidos o reservados, tipo de exchange desconocido, DLQ sin DLX y TTL fuera de rango (400); recursos inexistentes (404); recursos protegidos (409); petición sin token (401).
+
+Uso:
+
+1. En Postman: **Import** → seleccionar `postman/AndesStay-RabbitAdmin.postman_collection.json`.
+2. En la colección → **Variables** → pegar en `token` un JWT de Azure AD con rol `ADMIN` (sin la palabra `Bearer`).
+3. Clic derecho en la colección → **Run collection** → **Start run**.
+
 ## Ejecutar
 
 1. Levantar RabbitMQ con el repositorio `infra-andesstay-messaging` (`docker compose up -d`).
