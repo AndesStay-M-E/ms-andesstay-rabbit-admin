@@ -82,7 +82,7 @@ Uso:
 
 1. Levantar RabbitMQ con el repositorio `infra-andesstay-messaging` (`docker compose up -d`).
 2. `./mvnw spring-boot:run` (Windows: `mvnw.cmd spring-boot:run`).
-   Con el tenant de Eduardo: `mvnw.cmd spring-boot:run -Dspring-boot.run.profiles=eduardo`.
+   El directorio AndesStay (Endfield398) ya está configurado por defecto en `application.yaml`.
 
 ## Pruebas
 
